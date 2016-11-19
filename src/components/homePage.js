@@ -9,7 +9,7 @@ var Home = React.createClass({
     // Define React component in JSX
     render: function () {
         return (
-            <div className="jumbotron">
+            <div>
                 <h1>Intro</h1>
                 <p>Paragraph</p>
             </div>

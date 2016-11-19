@@ -1,25 +1,22 @@
+// Bootstrap app using Browserify
 "use strict";
 
-// Bootstrap app using Browserify and CommonJS Pattern
-
-// IIFE overcomes jQuery is not defined browser error when "use strict" in this file
+// IIFE overcomes jQuery not defined browser error when "use strict" used
 (function(win) {
     return function () { win.$ = win.jQuery = require('jquery'); };
 }(window));
 
+// CommonJS Pattern
 var React = require('react');
 var Home = require('./components/homePage');
 var About = require('./components/about/aboutPage');
+var Header = require('./components/common/header');
 
 // Bundle and export module context
 var Message = console.log('App was bootstrapped using Browserify and CommonJS');
 module.exports = Message;
 
-/**
- *  Track child routes and render depending on URL.
- *  Check properties and route for the app.
- *  Render appropriate markup
- */
+// Track child routes and render URL with appropriate markup.
 var App = React.createClass({
    render: function () {
        var Child;
@@ -31,16 +28,14 @@ var App = React.createClass({
 
        return (
            <div>
+               <Header />
                <Child />
            </div>
        );
-
    }
 });
 
-/**
- *  Define render function for route change
- */
+// Define render function for route change
 function render() {
     console.log("New Route: ", window.location.hash);
     var route = window.location.hash.substr(1);
@@ -50,8 +45,6 @@ function render() {
                 );
 }
 
-/**
- *  Watch for hash change in URL when rendering (i.e. localhost:9005/#about)
- */
-window.addEventListener('hashChange', render);
+// Watch for hash change in URL when rendering (i.e. localhost:9005/#about)
+window.addEventListener('hashchange', render);
 render();
