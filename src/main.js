@@ -10,6 +10,7 @@
 var React = require('react');
 var Home = require('./components/homePage');
 var About = require('./components/about/aboutPage');
+var Skills = require('./components/skills/skillPage');
 var Header = require('./components/common/header');
 
 // Bundle and export module context
@@ -23,6 +24,7 @@ var App = React.createClass({
 
        switch(this.props.route) {
            case 'about': Child = About; break;
+           case 'skills': Child = Skills; break;
            default: Child = Home;
        }
 
