@@ -64,7 +64,15 @@ gulp.task('js', function() {
         .pipe(connect.reload());
 });
 
-gulp.task('css', ['sass'], function() {
+gulp.task('sass', function() {
+    return gulp
+        .src(config.paths.sass)
+        .pipe(sass())
+        .pipe(concat('bundle-sass.css'))
+        .pipe(gulp.dest(config.paths.dist + '/css'));
+});
+
+gulp.task('css', function() {
     return gulp
         .src(config.paths.css)
         .pipe(concat('bundle.css'))
@@ -80,14 +88,6 @@ gulp.task('css:prefix', ['css'], function(){
         .pipe(gulp.dest(config.paths.dist + '/css'));
 });
 
-gulp.task('sass', function() {
-    return gulp
-        .src(config.paths.sass)
-        .pipe(sass())
-        .pipe(concat('bundle-sass.css'))
-        .pipe(gulp.dest(config.paths.dist + '/css'));
-});
-
 gulp.task('lint', function() {
     return gulp
         .src(config.paths.js)
@@ -100,4 +100,4 @@ gulp.task('watch', function() {
     gulp.watch(config.paths.js, ['js', 'lint']);
 });
 
-gulp.task('default', ['html', 'js', 'css:prefix', 'lint', 'open', 'watch']);
+gulp.task('default', ['html', 'js', 'sass', 'css:prefix', 'lint', 'open', 'watch']);
