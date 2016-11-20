@@ -5,6 +5,10 @@ var React = require('react');
 // Child sent data from Parent (not API)
 
 var SkillList = React.createClass({
+    // Declare PropTypes in static object
+    propTypes: {
+        skills: React.PropTypes.array.isRequired // Require skills object
+    },
     // Dynamic data from Mock API displayed
     render: function () {
         var createSkillRow = function(skill) {

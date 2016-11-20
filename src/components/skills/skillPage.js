@@ -6,7 +6,7 @@ var SkillApi = require('../../api/skillApi');
 // Delegate handling of markup down to Child Component
 var SkillList = require('./skillList');
 
-var Skills = React.createClass({
+var SkillPage = React.createClass({
     // Lifecycle methods
     getInitialState: function() {
         return {
@@ -26,11 +26,11 @@ var Skills = React.createClass({
         return (
             <div>
                 <h1>Skills</h1>
-                {/* Call SkillList (Child) Component passing skills list from State to its Props*/}
+                {/* Compose SkillList (Child) Component by calling it and passing skills list from State to its Props*/}
                 <SkillList skills={this.state.skills} />
             </div>
         );
    }
 });
 
-module.exports = Skills;
+module.exports = SkillPage;
