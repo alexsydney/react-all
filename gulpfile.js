@@ -76,7 +76,7 @@ gulp.task('js:concat', function() {
         .on('error', console.error.bind(console))
         .pipe(source('bundle.js'))
         .pipe(gulp.dest(config.paths.dist + '/scripts'))
-        .pipe(connect.reload());
+        // .pipe(connect.reload());
 });
 
 gulp.task('js:sourcemaps', ['js:concat'], function() {
@@ -124,7 +124,7 @@ gulp.task('lint', function() {
 
 gulp.task('watch', function() {
     gulp.watch(config.paths.html, ['html']);
-    gulp.watch(config.paths.js, ['js', 'lint']);
+    gulp.watch(config.paths.js, ['js:concat', 'js:sourcemaps', 'lint']);
     gulp.watch(config.paths.sass, ['sass', 'sass:prefix']);
 });
 

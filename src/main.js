@@ -1,52 +1,19 @@
 // Bootstrap app using Browserify
 "use strict";
 
-// IIFE overcomes jQuery not defined browser error when "use strict" used
-(function(win) {
-    return function () { win.$ = win.jQuery = require('jquery'); };
-}(window));
-
 // CommonJS Pattern
 var React = require('react');
-var Home = require('./components/homePage');
-var About = require('./components/about/aboutPage');
-var SkillPage = require('./components/skills/skillPage');
-var Header = require('./components/common/header');
+var Router = require('react-router');
+var routes = require('./routes');
 
-// Bundle and export module context
-var Message = console.log('App was bootstrapped using Browserify and CommonJS');
-module.exports = Message;
-
-// Track child routes and render URL with appropriate markup.
-var App = React.createClass({
-   render: function () {
-       var Child;
-
-       switch(this.props.route) {
-           case 'about': Child = About; break;
-           case 'skills': Child = SkillPage; break;
-           default: Child = Home;
-       }
-
-       return (
-           <div>
-               <Header />
-               <Child />
-           </div>
-       );
-   }
+/**
+ *  Run React Router passing function that takes handler as parameter
+ *  renders it on the referenced app placeholder (in index.html where React App is hosted)
+ *  for the handler currently in scope based on URL
+ */
+Router.run(routes, function(Handler) {
+   React.render(
+       <Handler />,
+       document.getElementById('app')
+   );
 });
-
-// Define render function for route change
-function render() {
-    console.log("New Route: ", window.location.hash);
-    var route = window.location.hash.substr(1);
-    React.render(
-                    <App route={route} />,
-                    document.getElementById('app')
-                );
-}
-
-// Watch for hash change in URL when rendering (i.e. localhost:9005/#about)
-window.addEventListener('hashchange', render);
-render();

@@ -14,5 +14,4 @@ nvm use 7.1
 
 ### Known Issues
 
-* URL routing list items ad-hoc hacked solution so unable to pass data to components via query string or re-route
-
+* Source maps do not appear in browser even when enable source maps in Dev Tools
