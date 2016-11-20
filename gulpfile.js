@@ -79,6 +79,13 @@ gulp.task('js', function() {
         .pipe(connect.reload());
 });
 
+gulp.task('css', function() {
+    return gulp
+        .src(config.paths.css)
+        .pipe(concat('bundle.css'))
+        .pipe(gulp.dest(config.paths.dist + '/css'));
+});
+
 gulp.task('sass', function() {
     return gulp
         .src(config.paths.sass)
@@ -87,20 +94,14 @@ gulp.task('sass', function() {
         .pipe(gulp.dest(config.paths.dist + '/css'));
 });
 
-gulp.task('css', function() {
+gulp.task('sass:prefix', ['sass'], function(){
     return gulp
-        .src(config.paths.css)
-        .pipe(concat('bundle.css'))
-        .pipe(gulp.dest(config.paths.dist + '/css'));
-});
-
-gulp.task('css:prefix', ['css'], function(){
-    return gulp
-        .src(config.paths.dist + '/css/bundle.css')
+        .src(config.paths.dist + '/css/bundle-sass.css')
         .pipe(autoprefixer({
             browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
         }))
-        .pipe(gulp.dest(config.paths.dist + '/css'));
+        .pipe(gulp.dest(config.paths.dist + '/css'))
+        .pipe(connect.reload());
 });
 
 gulp.task('lint', function() {
@@ -113,6 +114,7 @@ gulp.task('lint', function() {
 gulp.task('watch', function() {
     gulp.watch(config.paths.html, ['html']);
     gulp.watch(config.paths.js, ['js', 'lint']);
+    gulp.watch(config.paths.sass, ['sass', 'sass:prefix']);
 });
 
 gulp.task(
@@ -121,7 +123,8 @@ gulp.task(
         'html',
         'js',
         'sass',
-        'css:prefix',
+        'sass:prefix',
+        'css',
         'images',
         'images:favicon',
         'lint',
