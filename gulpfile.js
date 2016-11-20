@@ -69,12 +69,21 @@ gulp.task('images:favicon', function() {
         .pipe(connect.reload());
 });
 
-gulp.task('js', function() {
+gulp.task('js:concat', function() {
     return browserify(config.paths.mainJs)
         .transform(reactify)
         .bundle()
         .on('error', console.error.bind(console))
         .pipe(source('bundle.js'))
+        .pipe(gulp.dest(config.paths.dist + '/scripts'))
+        .pipe(connect.reload());
+});
+
+gulp.task('js:sourcemaps', ['js:concat'], function() {
+    return gulp
+        .src(config.paths.dist + '/scripts/bundle.js')
+        .pipe(sourcemaps.init())
+        .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest(config.paths.dist + '/scripts'))
         .pipe(connect.reload());
 });
@@ -89,8 +98,10 @@ gulp.task('css', function() {
 gulp.task('sass', function() {
     return gulp
         .src(config.paths.sass)
+        .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(concat('bundle-sass.css'))
+        .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest(config.paths.dist + '/css'));
 });
 
@@ -121,7 +132,8 @@ gulp.task(
     'default',
     [
         'html',
-        'js',
+        'js:concat',
+        'js:sourcemaps',
         'sass',
         'sass:prefix',
         'css',
