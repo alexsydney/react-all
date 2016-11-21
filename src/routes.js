@@ -23,6 +23,7 @@ var routes = (
     <Route name="app" path="/" handler={require('./components/app')}>
         <DefaultRoute handler={require('./components/homePage')} />
         <Route name="skills" handler={require('./components/skills/skillPage')} />
+        <Route name="addSkill" path="skill" handler={require('./components/skills/skillManager')} />
         <Route name="about" handler={require('./components/about/aboutPage')} />
         <NotFoundRoute handler={require('./components/notFoundPage')} />
         {/* Redirect Subdirectories (Bad References) */}

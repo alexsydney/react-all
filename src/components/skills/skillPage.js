@@ -3,6 +3,9 @@
 var React = require('react');
 var SkillApi = require('../../api/skillApi');
 
+var Router = require('react-router');
+var Link = Router.Link;
+
 // Delegate handling of markup down to Child Component
 var SkillList = require('./skillList');
 
@@ -26,6 +29,7 @@ var SkillPage = React.createClass({
         return (
             <div>
                 <h1>Skills</h1>
+                <Link to="addSkill" className="btn btn-default">Add Skill</Link>
                 {/* Compose SkillList (Child) Component by calling it and passing skills list from State to its Props*/}
                 <SkillList skills={this.state.skills} />
             </div>
