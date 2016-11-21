@@ -8,12 +8,17 @@ var SkillForm = React.createClass({
             <form>
                 <h1>Manage Skill</h1>
                 <label htmlFor="skillName">Skill Name</label>
+                {/* Input 'skillName' bound to skillName Prop passed from Parent Component */}
+                {/* Use onChange handler that is passed down from Parent Component
+                    to attach to input. Upon change the event bubbles up to Parent Component,
+                    which calls setSkillState event handler to update State */}
                 <input type="text"
                        name="skillName"
                        className="form-control"
                        placeholder="Skill Name"
                        ref="skillName"
-                       value="" />
+                       onChange={this.props.onChange}
+                       value={this.props.skill.skillName} />
                 <br />
                 <input type="submit"
                        value="Save"
