@@ -4,6 +4,16 @@ var React = require('react');
 var Input = require('../common/textInput');
 
 var SkillForm = React.createClass({
+    // Expectations for consumers of this Reusable Component
+    propTypes: {
+        // Required Props
+        skill: React.PropTypes.object.isRequired,
+        onSave: React.PropTypes.func.isRequired,
+        onChange: React.PropTypes.func.isRequired,
+        // Optional Props
+        errors: React.PropTypes.object
+    },
+
     render: function () {
         return (
             <form>
