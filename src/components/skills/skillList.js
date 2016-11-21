@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require('react');
+var Link = require('react-router').Link;
 
 // Child sent data from Parent (not API)
 
@@ -15,7 +16,7 @@ var SkillList = React.createClass({
             return (
                 <div className="row" key={skill.id}>
                     <div className="col-xs-4">
-                        <a href={"/#skills/" + skill.id}>{skill.id}</a>
+                        <Link to="editSkill" params={{id: skill.id}}>{skill.id}</Link>
                     </div>
                     <div className="col-xs-4">
                         {skill.skillCategory}

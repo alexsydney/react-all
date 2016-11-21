@@ -36,6 +36,19 @@ var SkillManager = React.createClass({
             dirty: false
         };
     },
+    componentWillMount: function() {
+        // React Router passes the params down via Props
+        var skillId = this.props.params.id; // from path '/skill/:id'
+
+        /**
+         *  Check the skillId exists in the URL parameters
+         *  and if so perform call to Skill API to retrieve the skill for the
+         *  provided skillId and then set the skill State to the response
+         */
+        if (skillId) {
+            this.setState({skill: SkillApi.getSkillById(skillId)});
+        }
+    },
     /**
      *  Input Field Change Handler called on each key press to update the State on this Parent Component.
      *  It takes event references bubbled up from Child Component then Updates Field State that
