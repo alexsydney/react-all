@@ -4,6 +4,7 @@ var React = require('react');
 var Router = require('react-router');
 var SkillForm = require('./skillForm');
 var SkillApi = require('../../api/skillApi');
+var toastr = require('toastr');
 
 var SkillManager = React.createClass({
     // Mixins
@@ -44,6 +45,7 @@ var SkillManager = React.createClass({
     saveSkill: function(event) {
         event.preventDefault(); // prevent default browser behaviour of button actually submitting form
         SkillApi.saveSkill(this.state.skill);
+        toastr.success('Skill saved.');
         this.transitionTo('skills');
     },
     render: function() {
