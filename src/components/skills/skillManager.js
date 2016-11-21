@@ -2,6 +2,7 @@
 
 var React = require('react');
 var SkillForm = require('./skillForm');
+var SkillApi = require('../../api/skillApi');
 
 var SkillManager = React.createClass({
     // Lifecycle methods
@@ -29,6 +30,15 @@ var SkillManager = React.createClass({
         this.state.skill[field] = value;
         return this.setState({skill: this.state.skill});
     },
+    /**
+     *  Save skill to Mock API accepts event parameter passed up from Child Component
+     *  and pass down this saveSkill function to Child Component in render call using onSave
+     *  (no DB is being hit and no AJAX calls are made to a server)
+     */
+    saveSkill: function(event) {
+        event.preventDefault(); // prevent default browser behaviour of button actually submitting form
+        SkillApi.saveSkill(this.state.skill);
+    },
     render: function() {
         {/* Controller View calls Child Form */}
         {/* Pass initial State data to Child Form Component via Props */}
@@ -36,7 +46,8 @@ var SkillManager = React.createClass({
 
             <SkillForm
                 skill={this.state.skill}
-                onChange={this.setSkillState}/>
+                onChange={this.setSkillState}
+                onSave={this.saveSkill} />
         );
     }
 });

@@ -22,9 +22,13 @@ var SkillForm = React.createClass({
                     label="Skill Name"
                     value={this.props.skill.skillName}
                     onChange={this.props.onChange} />
+                {/* onClick handler is passed down from Parent Component skillManager
+                 to attach to input submit button. Upon change the event bubbles up to Parent Component
+                 which calls saveSkill event handler to save the field data to the Mock API */}
                 <input type="submit"
                        value="Save"
-                       className="btn btn-default" />
+                       className="btn btn-default"
+                       onClick={this.props.onSave} />
             </form>
         );
     }
