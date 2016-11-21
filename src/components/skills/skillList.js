@@ -14,10 +14,13 @@ var SkillList = React.createClass({
         var createSkillRow = function(skill) {
             return (
                 <div className="row" key={skill.id}>
-                    <div className="col-xs-6">
+                    <div className="col-xs-4">
                         <a href={"/#skills/" + skill.id}>{skill.id}</a>
                     </div>
-                    <div className="col-xs-6">
+                    <div className="col-xs-4">
+                        {skill.skillCategory}
+                    </div>
+                    <div className="col-xs-4">
                         {skill.skillName}
                     </div>
                 </div>
@@ -26,8 +29,9 @@ var SkillList = React.createClass({
         return (
             <div>
                 <div className="row">
-                    <div className="col-xs-6"><strong>ID</strong></div>
-                    <div className="col-xs-6"><strong>Skill Name</strong></div>
+                    <div className="col-xs-4"><strong>ID</strong></div>
+                    <div className="col-xs-4"><strong>Skill Category</strong></div>
+                    <div className="col-xs-4"><strong>Skill Name</strong></div>
                 </div>
                 {/* Call method to iterate through skills */}
                 {/* Child receives Props (NOT State) */}

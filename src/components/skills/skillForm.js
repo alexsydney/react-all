@@ -7,6 +7,15 @@ var SkillForm = React.createClass({
         return (
             <form>
                 <h1>Manage Skill</h1>
+                <label htmlFor="skillCategory">Skill Category</label>
+                <input type="text"
+                       name="skillCategory"
+                       className="form-control"
+                       placeholder="Skill Category"
+                       ref="skillCategory"
+                       onChange={this.props.onChange}
+                       value={this.props.skill.skillCategory} />
+                <br />
                 <label htmlFor="skillName">Skill Name</label>
                 {/* Input 'skillName' bound to skillName Prop passed from Parent Component */}
                 {/* Use onChange handler that is passed down from Parent Component

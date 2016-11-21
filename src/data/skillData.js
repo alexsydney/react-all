@@ -2,12 +2,15 @@ module.exports = {
     skills:
         [
             {
-                id: 'front-end',
-                skillName: 'Front-End'
+                id: '1',
+                skillCategory: 'Front End',
+                skillName: 'React.js'
+
             },
             {
-                id: 'back-end',
-                skillName: 'Back-End'
+                id: '2',
+                skillCategory: 'Back End',
+                skillName: 'Ruby'
             }
         ]
 };

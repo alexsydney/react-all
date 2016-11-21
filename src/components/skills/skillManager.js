@@ -9,7 +9,11 @@ var SkillManager = React.createClass({
     // Define initial State to contain object called skill
     getInitialState: function() {
         return {
-            skill: { id: '', skillName: '' } // Initial state when no skills
+            skill: {
+                id: '',
+                skillName: '',
+                skillCategory: ''
+            } // Initial state when no skills
         };
     },
     /**
