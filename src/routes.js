@@ -10,6 +10,9 @@ var Router = require('react-router');
 // Reference to DefaultRoute to declare route to load when page loads at root URL
 var DefaultRoute = Router.DefaultRoute;
 
+// Reference to NotFoundRoute Component that comes with React Router
+var NotFoundRoute = Router.NotFoundRoute;
+
 // Reference to Route Component that defines routes
 var Route = Router.Route;
 
@@ -19,6 +22,7 @@ var routes = (
         <DefaultRoute handler={require('./components/homePage')} />
         <Route name="skills" handler={require('./components/skills/skillPage')} />
         <Route name="about" handler={require('./components/about/aboutPage')} />
+        <NotFoundRoute handler={require('./components/notFoundPage')} />
     </Route>
 );
 
