@@ -1,10 +1,16 @@
 "use strict";
 
 var React = require('react');
+var Router = require('react-router');
 var SkillForm = require('./skillForm');
 var SkillApi = require('../../api/skillApi');
 
 var SkillManager = React.createClass({
+    // Mixins
+    mixins: [
+        Router.Navigation
+    ],
+
     // Lifecycle methods
 
     // Define initial State to contain object called skill
@@ -38,6 +44,7 @@ var SkillManager = React.createClass({
     saveSkill: function(event) {
         event.preventDefault(); // prevent default browser behaviour of button actually submitting form
         SkillApi.saveSkill(this.state.skill);
+        this.transitionTo('skills');
     },
     render: function() {
         {/* Controller View calls Child Form */}
