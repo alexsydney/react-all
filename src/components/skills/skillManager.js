@@ -12,6 +12,15 @@ var SkillManager = React.createClass({
         Router.Navigation
     ],
 
+    // Static methods when loading/unloading
+    statics: {
+        willTransitionFrom: function(transition, component) {
+            if (component.state.dirty && !confirm('Leave without saving?')) {
+                transition.abort();
+            }
+        }
+    },
+
     // Lifecycle methods
 
     // Define initial State to contain object called skill
@@ -23,7 +32,8 @@ var SkillManager = React.createClass({
                 skillName: '',
                 skillCategory: ''
             },
-            errors: {}
+            errors: {},
+            dirty: false
         };
     },
     /**
@@ -34,6 +44,7 @@ var SkillManager = React.createClass({
      *  along with an Event Change Handler onChange. In the Child Component we need to use the onChange handler.
      */
     setSkillState: function(event) {
+        this.setState({dirty: true});
         var field = event.target.name;
         var value = event.target.value;
         this.state.skill[field] = value;
@@ -73,6 +84,7 @@ var SkillManager = React.createClass({
         }
 
         SkillApi.saveSkill(this.state.skill);
+        this.setState({dirty: false}); // Reset state of whether any input fields changed
         toastr.success('Skill saved.');
         this.transitionTo('skills');
     },
