@@ -17,11 +17,13 @@ var SkillManager = React.createClass({
     // Define initial State to contain object called skill
     getInitialState: function() {
         return {
+            // Initial state when no skills
             skill: {
                 id: '',
                 skillName: '',
                 skillCategory: ''
-            } // Initial state when no skills
+            },
+            errors: {}
         };
     },
     /**
@@ -37,6 +39,27 @@ var SkillManager = React.createClass({
         this.state.skill[field] = value;
         return this.setState({skill: this.state.skill});
     },
+    // Validation of form
+    skillFormIsValid: function() {
+        var formIsValid = true;
+
+        // Use State to track errors that occur. Clear prior errors
+        this.state.errors = {};
+
+        if (this.state.skill.skillCategory.length < 3) {
+            this.state.errors.skillCategory = 'Skill Category must be >3 characters';
+            formIsValid = false;
+        }
+
+        if (this.state.skill.skillName.length < 3) {
+            this.state.errors.skillName = 'Skill Name must be >3 characters';
+            formIsValid = false;
+        }
+
+        // Always call setState when changing state
+        this.setState({errors: this.state.errors});
+        return formIsValid;
+    },
     /**
      *  Save skill to Mock API accepts event parameter passed up from Child Component
      *  and pass down this saveSkill function to Child Component in render call using onSave
@@ -44,6 +67,11 @@ var SkillManager = React.createClass({
      */
     saveSkill: function(event) {
         event.preventDefault(); // prevent default browser behaviour of button actually submitting form
+
+        if (!this.skillFormIsValid()) {
+            return;
+        }
+
         SkillApi.saveSkill(this.state.skill);
         toastr.success('Skill saved.');
         this.transitionTo('skills');
@@ -56,7 +84,8 @@ var SkillManager = React.createClass({
             <SkillForm
                 skill={this.state.skill}
                 onChange={this.setSkillState}
-                onSave={this.saveSkill} />
+                onSave={this.saveSkill}
+                errors={this.state.errors} />
         );
     }
 });

@@ -12,7 +12,8 @@ var SkillForm = React.createClass({
                     name="skillCategory"
                     label="Skill Category"
                     value={this.props.skill.skillCategory}
-                    onChange={this.props.onChange} />
+                    onChange={this.props.onChange}
+                    error={this.props.errors.skillCategory} />
                 {/* Input 'skillName' bound to skillName Prop passed from Parent Component */}
                 {/* Use onChange handler that is passed down from Parent Component
                  to attach to input. Upon change the event bubbles up to Parent Component,
@@ -21,7 +22,8 @@ var SkillForm = React.createClass({
                     name="skillName"
                     label="Skill Name"
                     value={this.props.skill.skillName}
-                    onChange={this.props.onChange} />
+                    onChange={this.props.onChange}
+                    error={this.props.errors.skillName} />
                 {/* onClick handler is passed down from Parent Component skillManager
                  to attach to input submit button. Upon change the event bubbles up to Parent Component
                  which calls saveSkill event handler to save the field data to the Mock API */}
