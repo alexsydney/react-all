@@ -1,12 +1,12 @@
 @mixin white-text-on-black-bg() {
-  body {
+  * {
     background: $background-black;
     color: $font-white;
   }
 }
 
 @mixin black-text-on-white-bg() {
-  body {
+  * {
     background: $background-white;
     color: $font-black;
   }

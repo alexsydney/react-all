@@ -19,7 +19,13 @@ var config = {
     paths: {
         html: './src/*.html',                   // glob
         images: './src/images/*',
-        js: './src/**/*.js',
+        js: [
+            './src/**/*.js'
+        ],
+        libJs: [
+            'node_modules/jquery/dist/jquery.min.js',
+            'node_modules/bootstrap/dist/js/bootstrap.min.js'
+        ],
         sass: [
             './src/sass/**/*.scss'
         ],
@@ -69,6 +75,13 @@ gulp.task('images:favicon', function() {
         .pipe(connect.reload());
 });
 
+gulp.task('js:lib:concat', function() {
+    return gulp
+        .src(config.paths.libJs)
+        .pipe(concat('bundle-lib.js'))
+        .pipe(gulp.dest(config.paths.dist + '/scripts'))
+});
+
 gulp.task('js:concat', function() {
     return browserify(config.paths.mainJs)
         .transform(reactify)
@@ -76,7 +89,6 @@ gulp.task('js:concat', function() {
         .on('error', console.error.bind(console))
         .pipe(source('bundle.js'))
         .pipe(gulp.dest(config.paths.dist + '/scripts'))
-        // .pipe(connect.reload());
 });
 
 gulp.task('js:sourcemaps', ['js:concat'], function() {
@@ -132,6 +144,7 @@ gulp.task(
     'default',
     [
         'html',
+        'js:lib:concat',
         'js:concat',
         'js:sourcemaps',
         'sass',

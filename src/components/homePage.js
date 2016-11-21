@@ -3,15 +3,18 @@
 
 // Import React using CommonJS Pattern
 var React = require('react');
+var Router = require('react-router');
+var Link = Router.Link;
 
 var Home = React.createClass({
 
     // Define React component in JSX
     render: function () {
         return (
-            <div>
-                <h1>Intro</h1>
-                <p>Paragraph</p>
+            <div className="jumbotron">
+                <h1>Administration</h1>
+                <p>Welcome to the skills administration section</p>
+                <Link to="about" className="btn btn-primary btn-lg">Learn more</Link>
             </div>
         );
     }
