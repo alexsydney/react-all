@@ -1,8 +1,8 @@
 "use strict";
 
 var Dispatcher = require('../dispatcher/appDispatcher');
-var SkillApi = require('../../api/skillApi');
 var ActionTypes = require('../../constants/flux/typesSkill.js');
+var SkillApi = require('../../api/skillApi');
 
 // Define Actions for Skill Component
 var SkillActions = {

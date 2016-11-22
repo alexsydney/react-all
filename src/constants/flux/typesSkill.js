@@ -6,5 +6,6 @@ var keyMirror = require('react/lib/keyMirror');
 module.exports = keyMirror({
 
     // Define list of Action Types in app
+    INITIALISE: null,
     CREATE_SKILL: null
 });

@@ -5,6 +5,10 @@
 var React = require('react');
 var Router = require('react-router');
 var routes = require('./routes');
+var InitialiseActions = require('./flux/actions/actionsInitialise');
+
+// Abstraction for Flux SkillStore to be passed the initial skill list
+InitialiseActions.initApp();
 
 /**
  *  Run React Router passing function that takes handler as parameter

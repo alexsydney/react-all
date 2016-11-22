@@ -73,6 +73,10 @@ Dispatcher.register(function(action) {
 
     // Switch based on all possible Action Types that may be passed in with the Action Payload
     switch(action.actionType) {
+        case ActionTypes.INITIALISE:
+            _skills = action.initialData.skills;
+            SkillStore.emitChange();
+            break;
         case ActionTypes.CREATE_SKILL:
 
             // Save to Flux Store State in private data the skill value sent from in the Action Payload
@@ -84,6 +88,9 @@ Dispatcher.register(function(action) {
              *  so they update the UI
              */
             SkillStore.emitChange();
+            break;
+        default:
+            // no op
     }
 });
 
