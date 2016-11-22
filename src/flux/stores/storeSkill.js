@@ -15,7 +15,12 @@ var EventEmitter = require('events').EventEmitter;
  */
 var assign = require('object-assign');
 
+var _ = require('lodash');
+
 var CHANGE_EVENT = 'change';
+
+// Private variable to store data. Private as exported. Only change data in Flux Store via Public API
+var _skills = [];
 
 /**
  *  Public Store API functions.
@@ -46,18 +51,39 @@ var SkillStore = assign({}, EventEmitter.prototype, {
     
     emitChange: function () {
         this.emit(CHANGE_EVENT);
-    }
+    },
 
+    // Expose skill data
+    getAllSkills: function() {
+        return _skills;
+    },
+
+    getSkillById: function (id) {
+        return _.find(_skills, {id: id});
+    }
 });
 
 /**
  *  Private function implementation detail not concerned with our Public Store API
  *  Register Store with Dispatcher. All Stores are notified each time any
- *  Action occurs and is dispatched. Note: Flux differs here from traditional Pub-Sub Design Patterns
+ *  Action occurs and is dispatched from createSkill Action Creator.
+ *  Note: Flux differs here from traditional Pub-Sub Design Patterns
  */
 Dispatcher.register(function(action) {
 
     // Switch based on all possible Action Types that may be passed in with the Action Payload
+
+    case ActionTypes.CREATE_SKILL:
+
+        // Save to Flux Store State in private data the skill value sent from in the Action Payload
+        _skills.push(action.skill);
+
+        /**
+         *  Call emitChange function in Public API to emit the change whenever the Flux Store changes
+         *  to notify any React Components that registered with addChangeListener function of this Flux Store
+         *  so they update the UI
+         */
+        SkillStore.emitChange();
 });
 
 module.exports = SkillStore;
