@@ -21,6 +21,21 @@ var SkillPage = React.createClass({
         };
     },
 
+    // Consume Public Flux Store API calls to add listener for passed callback when this Component is mounted
+    componentWillMount: function() {
+        SkillStore.addChangeListener(this._onChange);
+    },
+
+    // Consume Public Flux Store API calls to remove listener of passed callback when this Component is unmounted
+    componentWillUnmount: function() {
+        SkillStore.removeChangeListener(this._onChange);
+    },
+
+    // Run and Set State whenever Flux Store data changes
+    _onChange: function() {
+        this.setState({ skills: SkillStore.getAllSkills() });
+    },
+
     // Dynamic data from Mock API displayed
     render: function () {
         return (
