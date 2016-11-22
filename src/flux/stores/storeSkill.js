@@ -95,6 +95,12 @@ Dispatcher.register(function(action) {
             SkillHelper.replaceValueAtIndexForExistingId(_skills, action.skill);
             SkillStore.emitChange();
             break;
+        case ActionTypes.DELETE_SKILL:
+            _.remove(_skills, function(skill) {
+                return action.id === skill.id;
+            });
+            SkillStore.emitChange();
+            break;
         default:
             // no op
     }

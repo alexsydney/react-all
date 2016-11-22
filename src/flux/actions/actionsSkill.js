@@ -34,7 +34,17 @@ var SkillActions = {
 
         Dispatcher.dispatch({
             actionType: ActionTypes.UPDATE_SKILL,   // Action Type
-            skill: updatedSkill                         // Action Data
+            skill: updatedSkill                     // Action Data
+        });
+    },
+
+    deleteSkill: function(id) {
+
+        SkillApi.deleteSkill(id);
+
+        Dispatcher.dispatch({
+            actionType: ActionTypes.DELETE_SKILL,   // Action Type
+            id: id                                  // Action Data
         });
     }
 
