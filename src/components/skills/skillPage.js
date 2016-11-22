@@ -35,10 +35,12 @@ var SkillPage = React.createClass({
 
     // Run and Set State whenever Flux Store data changes
     _onChange: function() {
+        console.log("Flux Status: React View - React Component with added Flux Store Change Event Listener called due to Flux Store delete data change");
         this.setState({ skills: SkillStore.getAllSkills() });
     },
 
     deleteSkill: function(id, event) {
+        console.log("Flux Status: React View - Delete skill requested with id: " + id);
         event.preventDefault();
         SkillActions.deleteSkill(id);
         toastr.success('Skill deleted');

@@ -68,7 +68,7 @@ var SkillStore = assign({}, EventEmitter.prototype, {
 /**
  *  Private function implementation detail not concerned with our Public Store API
  *  Register Store with Dispatcher. All Stores are notified each time any
- *  Action occurs and is dispatched from createSkill Action Creator.
+ *  Action occurs and is dispatched from Action Creator.
  *  Note: Flux differs here from traditional Pub-Sub Design Patterns
  */
 Dispatcher.register(function(action) {
@@ -96,6 +96,7 @@ Dispatcher.register(function(action) {
             SkillStore.emitChange();
             break;
         case ActionTypes.DELETE_SKILL:
+            console.log("Flux Status: Store - Called Flux Store registered with Dispatcher for React Component with added Flux Store Change Event Listener for Action Type DELETE_SKILL");
             _.remove(_skills, function(skill) {
                 return action.id === skill.id;
             });

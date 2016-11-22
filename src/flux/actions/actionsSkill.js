@@ -39,6 +39,8 @@ var SkillActions = {
     },
 
     deleteSkill: function(id) {
+        // debugger; // Breakpoints for browser
+        console.log("Flux Status: Actions - Called skill Action to Delete skill with id " + id + " and dispatching to Flux Store");
 
         SkillApi.deleteSkill(id);
 
