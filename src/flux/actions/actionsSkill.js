@@ -25,7 +25,7 @@ var SkillActions = {
         Dispatcher.dispatch({
             actionType: ActionTypes.CREATE_SKILL,   // Action Type
             skill: newSkill                         // Action Data
-        })
+        });
     }
 
 };

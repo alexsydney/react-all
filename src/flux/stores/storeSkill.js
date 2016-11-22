@@ -72,18 +72,19 @@ var SkillStore = assign({}, EventEmitter.prototype, {
 Dispatcher.register(function(action) {
 
     // Switch based on all possible Action Types that may be passed in with the Action Payload
+    switch(action.actionType) {
+        case ActionTypes.CREATE_SKILL:
 
-    case ActionTypes.CREATE_SKILL:
+            // Save to Flux Store State in private data the skill value sent from in the Action Payload
+            _skills.push(action.skill);
 
-        // Save to Flux Store State in private data the skill value sent from in the Action Payload
-        _skills.push(action.skill);
-
-        /**
-         *  Call emitChange function in Public API to emit the change whenever the Flux Store changes
-         *  to notify any React Components that registered with addChangeListener function of this Flux Store
-         *  so they update the UI
-         */
-        SkillStore.emitChange();
+            /**
+             *  Call emitChange function in Public API to emit the change whenever the Flux Store changes
+             *  to notify any React Components that registered with addChangeListener function of this Flux Store
+             *  so they update the UI
+             */
+            SkillStore.emitChange();
+    }
 });
 
 module.exports = SkillStore;

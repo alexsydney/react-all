@@ -3,7 +3,11 @@
 var React = require('react');
 var Router = require('react-router');
 var SkillForm = require('./skillForm');
-var SkillApi = require('../../api/skillApi');
+
+// Interact with Mock API via Flux Actions and Store instead of directly
+var SkillActions = require('../../flux/actions/actionsSkill');
+var SkillStore = require('../../flux/stores/storeSkill');
+
 var toastr = require('toastr');
 
 var SkillManager = React.createClass({
@@ -46,7 +50,7 @@ var SkillManager = React.createClass({
          *  provided skillId and then set the skill State to the response
          */
         if (skillId) {
-            this.setState({skill: SkillApi.getSkillById(skillId)});
+            this.setState({skill: SkillStore.getSkillById(skillId)});
         }
     },
     /**
@@ -96,7 +100,8 @@ var SkillManager = React.createClass({
             return;
         }
 
-        SkillApi.saveSkill(this.state.skill);
+        // SkillApi.saveSkill(this.state.skill);
+        SkillActions.createSkill(this.state.skill);
         this.setState({dirty: false}); // Reset state of whether any input fields changed
         toastr.success('Skill saved.');
         this.transitionTo('skills');
