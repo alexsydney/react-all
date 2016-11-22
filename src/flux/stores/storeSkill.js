@@ -15,6 +15,8 @@ var EventEmitter = require('events').EventEmitter;
  */
 var assign = require('object-assign');
 
+var CHANGE_EVENT = 'change';
+
 /**
  *  Extend the Flux Store using object-assign library by
  *  passing empty base object, and extend utilising:
@@ -34,15 +36,15 @@ var SkillStore = assign({}, EventEmitter.prototype, {
     addChangeListener: function(callback) {
 
         // Call the callback whenever change occurs in this Store
-        this.on('change', callback);
+        this.on(CHANGE_EVENT, callback);
     },
 
     removeChangeListener: function (callback) {
-        this.removeListener('change', callback);
+        this.removeListener(CHANGE_EVENT, callback);
     },
     
     emitChange: function () {
-        this.emitChange();
+        this.emit(CHANGE_EVENT);
     }
 
 });
