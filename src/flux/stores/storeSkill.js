@@ -18,6 +18,7 @@ var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
 /**
+ *  Public Store API functions.
  *  Extend the Flux Store using object-assign library by
  *  passing empty base object, and extend utilising:
  *      - EventEmitter.prototype parameter
@@ -48,3 +49,16 @@ var SkillStore = assign({}, EventEmitter.prototype, {
     }
 
 });
+
+/**
+ *  Private function implementation detail not concerned with our Public Store API
+ *  Register Store with Dispatcher. All Stores are notified each time any
+ *  Action occurs and is dispatched. Note: Flux differs here from traditional Pub-Sub Design Patterns
+ */
+Dispatcher.register(function(action) {
+
+    // Switch based on all possible Action Types that may be passed in with the Action Payload
+});
+
+module.exports = SkillStore;
+
