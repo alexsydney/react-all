@@ -26,7 +26,7 @@ var SkillList = React.createClass({
                         {skill.skillName}
                     </div>
                     <div className="col-xs-3">
-                        <Link to="skills" onClick={this.props.onDelete.bind(this, skill.id)}>Delete</Link>
+                        <Link to="skills" onClick={this.props.onDelete.bind(null, skill.id)}>Delete</Link>
                     </div>
                 </div>
             );
