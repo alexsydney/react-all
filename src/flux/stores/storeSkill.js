@@ -17,6 +17,8 @@ var assign = require('object-assign');
 
 var _ = require('lodash');
 
+var SkillHelper = require('../../helpers/replaceValueAtIndexForExistingId');
+
 var CHANGE_EVENT = 'change';
 
 // Private variable to store data. Private as exported. Only change data in Flux Store via Public API
@@ -71,7 +73,7 @@ var SkillStore = assign({}, EventEmitter.prototype, {
  */
 Dispatcher.register(function(action) {
 
-    // Switch based on all possible Action Types that may be passed in with the Action Payload
+    // Switch handler based on all possible Action Types that may be passed in with the Action Payload
     switch(action.actionType) {
         case ActionTypes.INITIALISE:
             _skills = action.initialData.skills;
@@ -87,6 +89,10 @@ Dispatcher.register(function(action) {
              *  to notify any React Components that registered with addChangeListener function of this Flux Store
              *  so they update the UI
              */
+            SkillStore.emitChange();
+            break;
+        case ActionTypes.UPDATE_SKILL:
+            SkillHelper.replaceValueAtIndexForExistingId(_skills, action.skill);
             SkillStore.emitChange();
             break;
         default:

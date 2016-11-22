@@ -26,6 +26,16 @@ var SkillActions = {
             actionType: ActionTypes.CREATE_SKILL,   // Action Type
             skill: newSkill                         // Action Data
         });
+    },
+
+    updateSkill: function(skill) {
+
+        var updatedSkill = SkillApi.saveSkill(skill);
+
+        Dispatcher.dispatch({
+            actionType: ActionTypes.UPDATE_SKILL,   // Action Type
+            skill: updatedSkill                         // Action Data
+        });
     }
 
 };

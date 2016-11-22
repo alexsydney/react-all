@@ -89,7 +89,7 @@ var SkillManager = React.createClass({
         return formIsValid;
     },
     /**
-     *  Save skill to Mock API accepts event parameter passed up from Child Component
+     *  Save skill to Mock API (via Flux Store) accepts event parameter passed up from Child Component
      *  and pass down this saveSkill function to Child Component in render call using onSave
      *  (no DB is being hit and no AJAX calls are made to a server)
      */
@@ -100,10 +100,14 @@ var SkillManager = React.createClass({
             return;
         }
 
-        // SkillApi.saveSkill(this.state.skill);
-        SkillActions.createSkill(this.state.skill);
+        if (this.state.skill.id) {
+            SkillActions.updateSkill(this.state.skill);
+            toastr.success('Skill updated.');
+        } else {
+            SkillActions.createSkill(this.state.skill);
+            toastr.success('Skill created.');
+        }
         this.setState({dirty: false}); // Reset state of whether any input fields changed
-        toastr.success('Skill saved.');
         this.transitionTo('skills');
     },
     render: function() {

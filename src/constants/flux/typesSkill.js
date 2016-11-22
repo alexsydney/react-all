@@ -7,5 +7,6 @@ module.exports = keyMirror({
 
     // Define list of Action Types in app
     INITIALISE: null,
-    CREATE_SKILL: null
+    CREATE_SKILL: null,
+    UPDATE_SKILL: null
 });

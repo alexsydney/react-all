@@ -3,6 +3,7 @@
 // mock web API by hitting hard coded data
 var skills = require('../data/skillData').skills;
 var _ = require('lodash');
+var SkillHelper = require('../helpers/replaceValueAtIndexForExistingId');
 
 // stub in action normally performed on the server in real app
 var _generateId = function(skill) {
@@ -29,8 +30,7 @@ var SkillApi = {
         console.log('Pretend just saved skill to DB via AJAX call');
 
         if (skill.id) {
-            var existingSkillIndex = _.indexOf(skills, _.find(skills, {id: skill.id}));
-            skills.splice(existingSkillIndex, 1, skill);
+            SkillHelper.replaceValueAtIndexForExistingId(skills, skill);
         } else {
             // simulate creation. server would generate ids for new skills in real app.
             // cloning so copy returned is passed by value rather than by reference.
