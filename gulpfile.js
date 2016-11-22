@@ -19,6 +19,11 @@ var config = {
     paths: {
         html: './src/*.html',                   // glob
         images: './src/images/*',
+        fonts: [
+            'node_modules/bootstrap/fonts/glyphicons-halflings-regular.woff2',
+            'node_modules/bootstrap/fonts/glyphicons-halflings-regular.woff',
+            'node_modules/bootstrap/fonts/glyphicons-halflings-regular.ttf'
+        ],
         js: [
             './src/**/*.js'
         ],
@@ -74,6 +79,12 @@ gulp.task('images:favicon', function() {
         .src('./src/favico.ico')
         .pipe(gulp.dest(config.paths.dist))
         .pipe(connect.reload());
+});
+
+gulp.task('fonts:bootstrap', function() {
+    return gulp
+        .src(config.paths.fonts)
+        .pipe(gulp.dest(config.paths.dist + '/fonts'))
 });
 
 gulp.task('js:lib:concat', function() {
@@ -137,6 +148,7 @@ gulp.task('lint', function() {
 
 gulp.task('watch', function() {
     gulp.watch(config.paths.html, ['html']);
+    gulp.watch(config.paths.fonts, ['fonts:bootstrap']);
     gulp.watch(config.paths.js, ['js:concat', 'js:sourcemaps', 'lint']);
     gulp.watch(config.paths.sass, ['sass', 'sass:prefix']);
 });
@@ -151,6 +163,7 @@ gulp.task(
         'sass',
         'sass:prefix',
         'css',
+        'fonts:bootstrap',
         'images',
         'images:favicon',
         'lint',

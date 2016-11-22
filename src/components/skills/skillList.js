@@ -16,17 +16,19 @@ var SkillList = React.createClass({
         var createSkillRow = function(skill) {
             return (
                 <div className="row" key={skill.id}>
-                    <div className="col-xs-3">
+                    <div className="col-xs-2">
                         <Link to="editSkill" params={{id: skill.id}}>{skill.id}</Link>
                     </div>
-                    <div className="col-xs-3">
+                    <div className="col-xs-4">
                         {skill.skillCategory}
                     </div>
-                    <div className="col-xs-3">
+                    <div className="col-xs-4">
                         {skill.skillName}
                     </div>
-                    <div className="col-xs-3">
-                        <Link to="skills" onClick={this.props.onDelete.bind(null, skill.id)}>Delete</Link>
+                    <div className="col-xs-2">
+                        <Link to="skills" onClick={this.props.onDelete.bind(null, skill.id)}>
+                            <span className="glyphicon glyphicon-remove-sign"></span>
+                        </Link>
                     </div>
                 </div>
             );
@@ -34,10 +36,10 @@ var SkillList = React.createClass({
         return (
             <div>
                 <div className="row">
-                    <div className="col-xs-3"><strong>ID</strong></div>
-                    <div className="col-xs-3"><strong>Skill Category</strong></div>
-                    <div className="col-xs-3"><strong>Skill Name</strong></div>
-                    <div className="col-xs-3"></div>
+                    <div className="col-xs-2"><strong>ID</strong></div>
+                    <div className="col-xs-4"><strong>Skill Category</strong></div>
+                    <div className="col-xs-4"><strong>Skill Name</strong></div>
+                    <div className="col-xs-2"></div>
                 </div>
                 {/* Call method to iterate through skills */}
                 {/* Child receives Props (NOT State) */}
