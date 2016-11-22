@@ -9,6 +9,8 @@ var SkillStore = require('../../flux/stores/storeSkill');
 var Router = require('react-router');
 var Link = Router.Link;
 
+var toastr = require('toastr');
+
 // Delegate handling of markup down to Child Component
 var SkillList = require('./skillList');
 
@@ -36,6 +38,12 @@ var SkillPage = React.createClass({
         this.setState({ skills: SkillStore.getAllSkills() });
     },
 
+    deleteSkill: function(id, event) {
+        event.preventDefault();
+        SkillActions.deleteSkill(id);
+        toastr.success('Skill deleted');
+    },
+
     // Dynamic data from Mock API displayed
     render: function () {
         return (
@@ -43,7 +51,9 @@ var SkillPage = React.createClass({
                 <h1>Skills</h1>
                 <Link to="addSkill" className="btn btn-default">Add Skill</Link>
                 {/* Compose SkillList (Child) Component by calling it and passing skills list from State to its Props*/}
-                <SkillList skills={this.state.skills} />
+                <SkillList
+                    skills={this.state.skills}
+                    onDelete={this.deleteSkill} />
             </div>
         );
    }

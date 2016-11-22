@@ -3,22 +3,12 @@
 var React = require('react');
 var Link = require('react-router').Link;
 
-var SkillActions = require('../../flux/actions/actionsSkill');
-
-var toastr = require('toastr');
-
 // Child sent data from Parent (not API)
 
 var SkillList = React.createClass({
     // Declare PropTypes in static object
     propTypes: {
         skills: React.PropTypes.array.isRequired // Require skills object
-    },
-
-    deleteSkill: function(id, event) {
-        event.preventDefault();
-        SkillActions.deleteSkill(id);
-        toastr.success('Skill deleted');
     },
 
     // Dynamic data from Mock API displayed
@@ -36,7 +26,7 @@ var SkillList = React.createClass({
                         {skill.skillName}
                     </div>
                     <div className="col-xs-3">
-                        <Link to="skills" onClick={this.deleteSkill.bind(this, skill.id)}>Delete</Link>
+                        <Link to="skills" onClick={this.props.onDelete.bind(this, skill.id)}>Delete</Link>
                     </div>
                 </div>
             );
